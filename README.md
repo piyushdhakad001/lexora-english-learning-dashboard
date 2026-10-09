@@ -33,7 +33,7 @@ Lexora is a React-based English learning dashboard that helps learners organize 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/lexora-english-learning-dashboard.git
+   git clone https://github.com/piyushdhakad001/lexora-english-learning-dashboard
    ```
 
 2. Open the project folder:
@@ -51,10 +51,10 @@ Lexora is a React-based English learning dashboard that helps learners organize 
 4. Start the development server:
 
    ```bash
-   npm start
+   npm run dev
    ```
 
-5. Open the local URL shown in your terminal, usually `http://localhost:3000`.
+5. Open the local URL shown in your terminal, usually `http://localhost:5173`.
 
 ## 📂 Project Structure
 
@@ -106,6 +106,6 @@ Lexora was built to practice React development, component-based architecture, st
 
 **Piyush Dhakad**
 
-* GitHub: [YOUR_GITHUB_USERNAME](https://github.com/piyushdhakad001)
+* GitHub: [Piyush Dhakad](https://github.com/piyushdhakad001)
 
 ---
