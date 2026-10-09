@@ -1,16 +1,111 @@
-# React + Vite
+# 📚 Lexora — English Learning Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Lexora is a React-based English learning dashboard that helps learners organize and track their progress in English collocations, connectors, idioms, and phrasal verbs. It provides an interactive interface for marking learning levels, searching expressions, and monitoring progress.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* 📊 **Progress Dashboard** — View Weak, Semi-Weak, and Mastered item counts.
+* 📚 **Four Learning Categories** — Collocations, Connectors, Idioms, and Phrasal Verbs.
+* 🔍 **Live Search** — Search expressions by Hindi meaning, English phrase, or example sentence.
+* 🎯 **Learning Status Tracking** — Mark expressions as Weak or Semi-Weak.
+* 🔄 **Shuffle Words** — Display expressions in a randomized order.
+* 🎛️ **Status Filtering** — Filter expressions by learning status.
+* 💾 **LocalStorage Persistence** — Keep learning progress after refreshing the browser.
+* 📱 **Responsive Interface** — Designed for convenient use across screen sizes.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React
+* JavaScript (ES6+)
+* CSS3
+* LocalStorage
+* Create React App / React Scripts
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+* Node.js
+* npm
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/lexora-english-learning-dashboard.git
+   ```
+
+2. Open the project folder:
+
+   ```bash
+   cd lexora-english-learning-dashboard
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm start
+   ```
+
+5. Open the local URL shown in your terminal, usually `http://localhost:3000`.
+
+## 📂 Project Structure
+
+```text
+src/
+├── components/
+│   ├── Tabs.jsx
+│   ├── Overview.jsx
+│   ├── Toolbar.jsx
+│   └── WordTable.jsx
+├── data/
+│   └── words.js
+├── utils/
+│   └── helpers.js
+├── App.jsx
+├── App.css
+└── index.js
+```
+
+## 💡 How It Works
+
+1. Select a learning category from the navigation tabs.
+2. Search for expressions using Hindi meanings, English phrases, or examples.
+3. Mark expressions as Weak or Semi-Weak according to your learning needs.
+4. Use filters to focus on expressions that need more practice.
+5. Shuffle the word list for a different learning order.
+6. Visit the overview dashboard to monitor your learning progress.
+
+Your marks are saved in the browser using LocalStorage, so they remain available after a page refresh on the same browser.
+
+## 🖼️ Screenshots
+
+### Dashboard
+![Lexora Dashboard](./screenshots/dashboard.png)
+
+### Learning Page
+![Lexora Learning Page](./screenshots/learning-page.png)
+
+
+## 🌐 Live Demo
+
+[View Live Demo](https://lexora-english-learning-dashboard.vercel.app/)
+
+## 🎯 Project Goal
+
+Lexora was built to practice React development, component-based architecture, state management, dynamic rendering, search and filtering, and browser-based data persistence.
+
+## 👨‍💻 Author
+
+**Piyush Dhakad**
+
+* GitHub: [YOUR_GITHUB_USERNAME](https://github.com/piyushdhakad001)
+
+---
