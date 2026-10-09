@@ -1,0 +1,444 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@500;600&display=swap");
+
+/* ---------- Basics ---------- */
+:root {
+  --tabs-h: 68px;                          /* height of the tab row */
+  --bar-bg: rgba(238, 242, 255, 0.95);     /* background of sticky bars */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", "Noto Sans Devanagari", sans-serif;
+  background: linear-gradient(135deg, #eef2ff 0%, #fdf2f8 100%);
+  color: #1f2937;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+
+/* ---------- Top tabs (sticky) ---------- */
+.tabs {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: var(--tabs-h);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  background: var(--bar-bg);
+  backdrop-filter: blur(8px);
+}
+
+.tab {
+  flex-shrink: 0;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #4b5563;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.tab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.tab.on {
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.45);
+}
+
+/* ---------- Page title ---------- */
+.hero {
+  text-align: center;
+  padding: 26px 16px;
+  margin: 8px 0 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(99, 102, 241, 0.35);
+}
+
+.hero h1 {
+  margin: 0 0 6px;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.hero p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 15px;
+}
+
+/* ---------- Search box and buttons (sticky, under the tabs) ---------- */
+.toolbar {
+  position: sticky;
+  top: var(--tabs-h);
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  background: var(--bar-bg);
+  backdrop-filter: blur(8px);
+}
+
+.toolbar input {
+  flex: 1;
+  min-width: 220px;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 15px;
+  outline: none;
+  background: #ffffff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.toolbar input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+.toolbar button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  background: #1f2937;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.toolbar button:hover {
+  background: #ef4444;
+  transform: translateY(-2px);
+}
+
+/* ---------- Cards (Overview page) ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+.cards .card {
+  margin-bottom: 0;
+}
+
+.card.big {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  padding: 22px;
+}
+
+.card.big span {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.card.red {
+  background: linear-gradient(135deg, #ef4444, #f97316);
+}
+
+.card.yellow {
+  background: linear-gradient(135deg, #facc15, #f59e0b);
+  color: #422006;
+}
+
+.card.green {
+  background: linear-gradient(135deg, #22c55e, #14b8a6);
+}
+
+/* ---------- Table ---------- */
+.table-wrap {
+  overflow-x: auto;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+th {
+  background: #1f2937;
+  color: #ffffff;
+  text-align: left;
+  padding: 14px 16px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+  font-size: 15px;
+}
+
+/* serial number column (#) */
+td.num {
+  width: 48px;
+  text-align: center;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+td.hi {
+  font-family: "Noto Sans Devanagari", "Poppins", sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  color: #4338ca;
+}
+
+td.empty {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+  font-size: 17px;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* Row colors based on status */
+tr.row-weak {
+  background: #fee2e2;
+}
+
+tr.row-semi {
+  background: #fef9c3;
+}
+
+tr.row-weak:hover {
+  background: #fecaca;
+}
+
+tr.row-semi:hover {
+  background: #fef08a;
+}
+
+/* ---------- Weak / Semi Weak buttons ---------- */
+td.btns {
+  white-space: nowrap;
+}
+
+.mark {
+  padding: 8px 12px;
+  margin: 2px 4px 2px 0;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #374151;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.mark:hover {
+  transform: scale(1.06);
+}
+
+.mark.active-weak {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+.mark.active-semi {
+  background: #facc15;
+  border-color: #facc15;
+  color: #422006;
+}
+
+/* ---------- Phone screens ---------- */
+/* ---------- Tablet + phone (900px and below) ---------- */
+@media (max-width: 900px) {
+  :root {
+    --bar-bg: rgba(238, 242, 255, 0.98);
+  }
+
+  .app {
+    padding: 0 12px 40px;
+  }
+
+  /* hide the scrollbar on the sideways-scrolling tab row */
+  .tabs {
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* table → cards */
+  .table-wrap {
+    overflow: visible;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  table {
+    min-width: 0;
+  }
+
+  thead {
+    display: none;
+  }
+
+  table,
+  tbody,
+  tr,
+  td {
+    display: block;
+    width: 100%;
+  }
+
+  /* tablet: 2 cards per row (must come AFTER the display:block rule) */
+  tbody {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* "Nothing found" message spans the full width */
+  tbody tr:only-child {
+    grid-column: 1 / -1;
+  }
+
+  tr {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  }
+
+  td {
+    padding: 4px 0;
+    border: none;
+  }
+
+  td.num {
+    width: auto;
+    text-align: left;
+    font-size: 13px;
+  }
+
+  td.hi {
+    font-size: 22px;
+  }
+
+  td.btns {
+    display: flex;
+    gap: 8px;
+    padding-top: 10px;
+  }
+
+  td.btns .mark {
+    flex: 1;
+    margin: 0;
+  }
+}
+
+/* ---------- Phone (600px and below) ---------- */
+@media (max-width: 600px) {
+  :root {
+    --tabs-h: 56px;
+  }
+
+  .tab {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  .hero {
+    padding: 18px 12px;
+  }
+
+  .hero h1 {
+    font-size: 22px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  /* one card per row */
+  tbody {
+    grid-template-columns: 1fr;
+  }
+
+  /* toolbar = ONE compact row that scrolls sideways, so it can stay sticky */
+  .toolbar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 8px 0;
+    margin-bottom: 8px;
+    scrollbar-width: none;
+  }
+
+  .toolbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* search box stays visible on the left while buttons scroll under it */
+  .toolbar input {
+    flex: 0 0 160px;
+    min-width: 0;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    padding: 10px 12px;
+  }
+
+  .toolbar button {
+    flex: 0 0 auto;
+    padding: 10px 14px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+}
