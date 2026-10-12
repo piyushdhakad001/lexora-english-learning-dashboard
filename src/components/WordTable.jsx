@@ -7,8 +7,10 @@ export default function WordTable({
   words,
   weakWords,
   semiWords,
+  masteredWords,
   onMarkWeak,
   onMarkSemi,
+  onMarkMastered,
 }) {
   return (
     <div className="table-wrap">
@@ -33,9 +35,11 @@ export default function WordTable({
           {words.map(function (word, index) {
             const id = getId(category, word);
 
-            let status = "mastered";
+            // A word is in at most ONE list, so the order of these checks is safe
+            let status = "unmarked";
             if (weakWords.includes(id)) status = "weak";
             if (semiWords.includes(id)) status = "semi";
+            if (masteredWords.includes(id)) status = "mastered";
 
             return (
               <WordRow
@@ -45,6 +49,7 @@ export default function WordTable({
                 status={status}
                 onMarkWeak={() => onMarkWeak(id)}
                 onMarkSemi={() => onMarkSemi(id)}
+                onMarkMastered={() => onMarkMastered(id)}
               />
             );
           })}

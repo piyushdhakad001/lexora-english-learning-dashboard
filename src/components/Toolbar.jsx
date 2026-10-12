@@ -1,9 +1,9 @@
-// 🎛️ Search box + 5 buttons.
+// 🎛️ Search box + 6 buttons.
 // It owns NO state. Everything comes in as props.
 export default function Toolbar({
   search,        // text in the search box
   onSearch,      // function: update the search text
-  filter,        // "all" | "weak" | "semi"
+  filter,        // "all" | "weak" | "semi" | "mastered"
   onSetFilter,   // function: change the filter
   onShuffle,     // function: shuffle words
   onShowAll,     // function: reset filter + shuffle
@@ -35,6 +35,13 @@ export default function Toolbar({
         onClick={() => onSetFilter("semi")}
       >
         🟡 Semi Weak Only
+      </button>
+
+      <button
+        className={filter === "mastered" ? "on" : ""}
+        onClick={() => onSetFilter("mastered")}
+      >
+        🟢 Mastered Only
       </button>
 
       <button className="reset" onClick={onReset}>Reset Marks</button>

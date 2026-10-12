@@ -2,8 +2,10 @@
 
 /* ---------- Basics ---------- */
 :root {
-  --tabs-h: 68px;                          /* height of the tab row */
-  --bar-bg: rgba(238, 242, 255, 0.95);     /* background of sticky bars */
+  --tabs-h: 68px;
+  /* height of the tab row */
+  --bar-bg: rgba(238, 242, 255, 0.95);
+  /* background of sticky bars */
 }
 
 * {
@@ -293,6 +295,16 @@ td.btns {
   background: #facc15;
   border-color: #facc15;
   color: #422006;
+}
+
+.active-mastered {
+  background: #43a047;
+  color: #fff;
+  border-color: #43a047;
+}
+
+.row-mastered td {
+  background: #e8f5e9;
 }
 
 /* ---------- Phone screens ---------- */

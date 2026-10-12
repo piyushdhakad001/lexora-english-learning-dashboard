@@ -21,13 +21,16 @@ export default function App() {
   // 🟡 ids of words marked Semi Weak
   const [semiWords, setSemiWords] = useState(() => loadList("semiList"));
 
+  // 🟢 ids of words marked Mastered
+  const [masteredWords, setMasteredWords] = useState(() => loadList("masteredList"));
+
   // 📄 which page is open: "overview" or a category key
   const [tab, setTab] = useState("overview");
 
   // 🔍 what is typed in the search box
   const [search, setSearch] = useState("");
 
-  // 🎛️ active filter: "all", "weak" or "semi"
+  // 🎛️ active filter: "all", "weak", "semi" or "mastered"
   const [filter, setFilter] = useState("all");
 
   // 🔀 shuffled words (null = normal order)
@@ -45,11 +48,16 @@ export default function App() {
     localStorage.setItem("semiList", JSON.stringify(semiWords));
   }, [semiWords]);
 
+  useEffect(() => {
+    localStorage.setItem("masteredList", JSON.stringify(masteredWords));
+  }, [masteredWords]);
+
   /* ==========================================================
-     🔘 ACTIONS: these must live inside App (they use its state)
+     🔘 ACTIONS: each button turns ON its own list and
+     removes the word from the other two (mutually exclusive)
      ========================================================== */
 
-  // 🔴 Click "Weak": toggle weak, and remove from semi
+  // 🔴 Click "Weak": toggle weak, and remove from semi + mastered
   function markWeak(id) {
     if (weakWords.includes(id)) {
       setWeakWords(weakWords.filter((wordId) => wordId !== id));
@@ -57,9 +65,10 @@ export default function App() {
     }
     setWeakWords([...weakWords, id]);
     setSemiWords(semiWords.filter((wordId) => wordId !== id));
+    setMasteredWords(masteredWords.filter((wordId) => wordId !== id));
   }
 
-  // 🟡 Click "Semi Weak": toggle semi, and remove from weak
+  // 🟡 Click "Semi Weak": toggle semi, and remove from weak + mastered
   function markSemi(id) {
     if (semiWords.includes(id)) {
       setSemiWords(semiWords.filter((wordId) => wordId !== id));
@@ -67,6 +76,18 @@ export default function App() {
     }
     setSemiWords([...semiWords, id]);
     setWeakWords(weakWords.filter((wordId) => wordId !== id));
+    setMasteredWords(masteredWords.filter((wordId) => wordId !== id));
+  }
+
+  // 🟢 Click "Mastered": toggle mastered, and remove from weak + semi
+  function markMastered(id) {
+    if (masteredWords.includes(id)) {
+      setMasteredWords(masteredWords.filter((wordId) => wordId !== id));
+      return;
+    }
+    setMasteredWords([...masteredWords, id]);
+    setWeakWords(weakWords.filter((wordId) => wordId !== id));
+    setSemiWords(semiWords.filter((wordId) => wordId !== id));
   }
 
   // 🗑️ Reset all marks (ask first)
@@ -74,6 +95,7 @@ export default function App() {
     if (window.confirm("Reset all marks?")) {
       setWeakWords([]);
       setSemiWords([]);
+      setMasteredWords([]);
     }
   }
 
@@ -109,7 +131,11 @@ export default function App() {
     return (
       <div className="app">
         <Tabs tab={tab} onOpenTab={openTab} />
-        <Overview weakWords={weakWords} semiWords={semiWords} />
+        <Overview
+          weakWords={weakWords}
+          semiWords={semiWords}
+          masteredWords={masteredWords}
+        />
       </div>
     );
   }
@@ -131,6 +157,7 @@ export default function App() {
     // TEST A: filter buttons
     if (filter === "weak" && !weakWords.includes(id)) return false;
     if (filter === "semi" && !semiWords.includes(id)) return false;
+    if (filter === "mastered" && !masteredWords.includes(id)) return false;
 
     // TEST B: search box
     const wordText = (
@@ -169,8 +196,10 @@ export default function App() {
         words={filteredWords}
         weakWords={weakWords}
         semiWords={semiWords}
+        masteredWords={masteredWords}
         onMarkWeak={markWeak}
         onMarkSemi={markSemi}
+        onMarkMastered={markMastered}
       />
     </div>
   );
