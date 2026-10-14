@@ -1,9 +1,9 @@
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { CATEGORIES, TOTAL_ITEMS } from "./data";
-import { usePersistentState, useDebounce, fisherYates } from "./hooks";
+import { useDebounce, fisherYates } from "./hooks"; // 🔄 usePersistentState removed
 import "./styles.css";
 
-const STORAGE_KEY = "lingo-notebook:progress:v1";
+// ❌ REMOVED: STORAGE_KEY (the server stores the marks now)
 // Progress map shape: { [itemId]: "weak" | "semi" }.
 // An item with no entry counts as "mastered" (default state).
 
@@ -121,10 +121,35 @@ function ConfirmModal({ onCancel, onConfirm }) {
 
 /* ---------- App shell: owns all state ---------- */
 export default function App() {
-  const [progress, setProgress] = usePersistentState(STORAGE_KEY, {});
+  // 🔄 CHANGED: plain state, filled from the server below
+  const [progress, setProgress] = useState({});
+  const [loaded, setLoaded] = useState(false);       // 🆕 true once the server answered
+  const [loadError, setLoadError] = useState(false); // 🆕 true if the server can't be reached
+
   const [tab, setTab] = useState("dashboard");
   const [orders, setOrders] = useState({}); // { [categoryKey]: string[] } shuffled id order
   const [confirming, setConfirming] = useState(false);
+
+  // 🆕 Load the marks from the server (runs once, when the app opens)
+  useEffect(() => {
+    fetch("/api/progress")
+      .then((res) => res.json())
+      .then((data) => {
+        setProgress(data);
+        setLoaded(true);
+      })
+      .catch(() => setLoadError(true));
+  }, []);
+
+  // 🆕 Save the marks to the server whenever they change
+  useEffect(() => {
+    if (!loaded) return; // don't save before the first load finishes
+    fetch("/api/progress", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(progress),
+    });
+  }, [progress, loaded]);
 
   // Immutable update: toggle a status, or clear it if clicked again.
   const setStatus = useCallback((id, status) => {
@@ -134,13 +159,17 @@ export default function App() {
       else next[id] = status;
       return next;
     });
-  }, [setProgress]);
+  }, []);
 
   const category = CATEGORIES.find((c) => c.key === tab);
 
   const shuffle = () =>
     setOrders((o) => ({ ...o, [tab]: fisherYates(category.items.map((i) => i.id)) }));
   const unshuffle = () => setOrders(({ [tab]: _, ...rest }) => rest);
+
+  // 🆕 Show a message until the server data arrives
+  if (loadError) return <p className="page">⚠️ Could not reach the server. Is it running?</p>;
+  if (!loaded) return <p className="page">Loading your notebook…</p>;
 
   return (
     <div className="page">
